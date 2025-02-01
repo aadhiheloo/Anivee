@@ -25,15 +25,11 @@
             opacity: 0;
             transition: opacity 1s ease-in-out;
         }
-        #gift {
-            width: 100px;
+        #gift-box {
+            width: 120px;
             cursor: pointer;
             margin-top: 20px;
-            animation: bounce 1s infinite alternate;
-        }
-        @keyframes bounce {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
+            display: none;
         }
         #popup-text {
             font-size: 28px;
@@ -58,6 +54,19 @@
             max-width: 80%;
             margin-top: 20px;
         }
+        #gallery {
+            display: none;
+            margin-top: 20px;
+        }
+        .gallery-img {
+            width: 150px;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-img:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -66,14 +75,23 @@
     <div class="text" id="text2">Its been 2 years</div>
     <div class="text" id="text3">Enk ninodi oru krym parayan indd</div>
 
-    <!-- Instagram Chat Gift Effect -->
-    <img id="gift" src="gift_icon.png" alt="Gift" onclick="openGift()">
+    <!-- Gift Box -->
+    <div id="gift-box" onclick="openGift()">
+        <img src="giftbox.png" alt="Gift Box">
+    </div>
 
     <!-- Popup Message -->
     <div id="popup-text">Happy Love Anniversary Muthee ❤️❤️❤️</div>
 
     <!-- Long Message -->
     <p id="long-message">[Your long message here...]</p>
+
+    <!-- Image Gallery -->
+    <div id="gallery">
+        <img src="img1.jpg" class="gallery-img">
+        <img src="img2.jpg" class="gallery-img">
+        <img src="img3.jpg" class="gallery-img">
+    </div>
 
     <script>
         let texts = ["text1", "text2", "text3"];
@@ -88,13 +106,13 @@
                     showText();
                 }, 2000);
             } else {
-                document.getElementById("gift").style.display = "block";
+                document.getElementById("gift-box").style.display = "block";
             }
         }
         window.onload = () => showText();
 
         function openGift() {
-            document.getElementById("gift").style.display = "none";
+            document.getElementById("gift-box").style.display = "none";
             document.getElementById("popup-text").style.display = "block";
 
             // Floating Hearts Animation
@@ -110,6 +128,7 @@
 
             setTimeout(() => {
                 document.getElementById("long-message").style.display = "block";
+                document.getElementById("gallery").style.display = "block";
             }, 3000);
         }
     </script>
