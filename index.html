@@ -3,135 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Anniversary</title>
+    <title>For My Love</title>
     <style>
         body {
+            background-color: black;
+            color: lightpink;
             font-family: Arial, sans-serif;
             text-align: center;
-            background: url('background.jpg') no-repeat center center/cover;
-            height: 100vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            padding: 20px;
         }
-        .text {
-            font-size: 24px;
-            color: white;
-            font-weight: bold;
-            position: absolute;
+        .glow {
+            text-shadow: 0 0 5px lightpink;
+        }
+        .hidden {
+            display: none;
+        }
+        .fade-in {
+            animation: fadeIn 1.5s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-up {
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transform: translateY(20px);
+            transition: opacity 1s ease-in, transform 1s ease-in;
         }
-        #gift-box {
-            width: 120px;
-            cursor: pointer;
-            margin-top: 20px;
-            display: none;
+        .slide-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
-        #popup-text {
-            font-size: 28px;
-            color: red;
-            font-weight: bold;
-            display: none;
-        }
-        .hearts {
-            position: absolute;
-            color: red;
-            font-size: 30px;
-            animation: float 5s linear infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-100vh); opacity: 0; }
-        }
-        #long-message {
-            display: none;
-            font-size: 18px;
-            color: white;
-            max-width: 80%;
+        video {
+            width: 80%;
+            max-width: 400px;
             margin-top: 20px;
         }
-        #gallery {
-            display: none;
-            margin-top: 20px;
-        }
-        .gallery-img {
-            width: 150px;
-            margin: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
-        }
-        .gallery-img:hover {
-            transform: scale(1.2);
+        .images img {
+            width: 80%;
+            max-width: 300px;
+            margin: 10px 0;
+            opacity: 0;
         }
     </style>
 </head>
 <body>
-
-    <div class="text" id="text1">Heyy Devu ❤️</div>
-    <div class="text" id="text2">Its been 2 years</div>
-    <div class="text" id="text3">Enk ninodi oru krym parayan indd</div>
-
-    <!-- Gift Box -->
-    <div id="gift-box" onclick="openGift()">
-        <img src="giftbox.png" alt="Gift Box">
+    <h1 class="glow" id="text1">heyy devuu</h1>
+    <h1 class="glow hidden" id="text2">enik ninodi oru krym parayan ind</h1>
+    
+    <video class="hidden" id="giftbox" controls>
+        <source src="Screen_Recording_20250201_155726_Instagram.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <p class="hidden" id="longText">This is where your long text goes. Add all the heartfelt words you want to say. 💖</p>
+    
+    <div class="images">
+        <img class="slide-up" src="images/pic1.jpg" alt="Image 1">
+        <img class="slide-up" src="images/pic2.jpg" alt="Image 2">
+        <img class="slide-up" src="images/pic3.jpg" alt="Image 3">
     </div>
-
-    <!-- Popup Message -->
-    <div id="popup-text">Happy Love Anniversary Muthee ❤️❤️❤️</div>
-
-    <!-- Long Message -->
-    <p id="long-message">[Your long message here...]</p>
-
-    <!-- Image Gallery -->
-    <div id="gallery">
-        <img src="img1.jpg" class="gallery-img">
-        <img src="img2.jpg" class="gallery-img">
-        <img src="img3.jpg" class="gallery-img">
-    </div>
-
+    
     <script>
-        let texts = ["text1", "text2", "text3"];
-        let index = 0;
-
-        function showText() {
-            if (index < texts.length) {
-                document.getElementById(texts[index]).style.opacity = "1";
-                setTimeout(() => {
-                    document.getElementById(texts[index]).style.opacity = "0";
-                    index++;
-                    showText();
-                }, 2000);
-            } else {
-                document.getElementById("gift-box").style.display = "block";
-            }
-        }
-        window.onload = () => showText();
-
-        function openGift() {
-            document.getElementById("gift-box").style.display = "none";
-            document.getElementById("popup-text").style.display = "block";
-
-            // Floating Hearts Animation
-            for (let i = 0; i < 10; i++) {
-                let heart = document.createElement("div");
-                heart.innerHTML = "❤️";
-                heart.classList.add("hearts");
-                heart.style.left = Math.random() * 100 + "vw";
-                heart.style.animationDuration = Math.random() * 2 + 3 + "s";
-                document.body.appendChild(heart);
-                setTimeout(() => heart.remove(), 5000);
-            }
-
+        function showNextElement(id, delay) {
             setTimeout(() => {
-                document.getElementById("long-message").style.display = "block";
-                document.getElementById("gallery").style.display = "block";
-            }, 3000);
+                document.getElementById(id).classList.remove('hidden');
+                document.getElementById(id).classList.add('fade-in');
+            }, delay);
         }
+        
+        window.onload = function() {
+            showNextElement('text2', 2000);
+            showNextElement('giftbox', 4000);
+            showNextElement('longText', 6000);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.slide-up').forEach((img, index) => {
+                    setTimeout(() => {
+                        img.classList.add('visible');
+                    }, index * 1000);
+                });
+            }, 8000);
+        };
     </script>
-
 </body>
 </html>
