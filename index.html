@@ -18,12 +18,13 @@
         .hidden {
             display: none;
         }
-        .fade-in {
-            animation: fadeIn 1.5s ease-in forwards;
+        .fade-in-out {
+            animation: fadeInOut 2s ease-in-out forwards;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        @keyframes fadeInOut {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
         .slide-up {
             opacity: 0;
@@ -38,6 +39,7 @@
             width: 80%;
             max-width: 400px;
             margin-top: 20px;
+            display: none;
         }
         .images img {
             width: 80%;
@@ -51,9 +53,11 @@
     <h1 class="glow" id="text1">heyy devuu</h1>
     <h1 class="glow hidden" id="text2">enik ninodi oru krym parayan ind</h1>
     
-    <video class="hidden" id="giftbox" controls>
-        <source src="Screen_Recording_20250201_155726_Instagram.mp4" type="video/mp4">
-        Your browser does not support the video tag.
+    <video id="video1" controls>
+        <source src="video1.mp4" type="video/mp4">
+    </video>
+    <video id="video2" controls>
+        <source src="video2.mp4" type="video/mp4">
     </video>
     
     <p class="hidden" id="longText">This is where your long text goes. Add all the heartfelt words you want to say. 💖</p>
@@ -65,17 +69,28 @@
     </div>
     
     <script>
-        function showNextElement(id, delay) {
+        function showText(id, delay, nextId) {
             setTimeout(() => {
                 document.getElementById(id).classList.remove('hidden');
-                document.getElementById(id).classList.add('fade-in');
+                document.getElementById(id).classList.add('fade-in-out');
+                setTimeout(() => {
+                    document.getElementById(id).classList.add('hidden');
+                    if (nextId) document.getElementById(nextId).classList.remove('hidden');
+                }, 2000);
+            }, delay);
+        }
+        
+        function showVideo(id, delay) {
+            setTimeout(() => {
+                document.getElementById(id).style.display = 'block';
             }, delay);
         }
         
         window.onload = function() {
-            showNextElement('text2', 2000);
-            showNextElement('giftbox', 4000);
-            showNextElement('longText', 6000);
+            showText('text1', 1000, 'text2');
+            showText('text2', 4000, null);
+            showVideo('video1', 6000);
+            showVideo('video2', 10000);
             
             setTimeout(() => {
                 document.querySelectorAll('.slide-up').forEach((img, index) => {
@@ -83,7 +98,7 @@
                         img.classList.add('visible');
                     }, index * 1000);
                 });
-            }, 8000);
+            }, 14000);
         };
     </script>
 </body>
