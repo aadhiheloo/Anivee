@@ -1,78 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Love</title>
-    <style>
-        body {
-            background-color: black;
-            color: lightpink;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
-        .glow {
-            text-shadow: 0 0 5px lightpink;
-        }
-        .hidden {
-            display: none;
-        }
-        .fade-in-out {
-            animation: fadeInOut 2s ease-in-out forwards;
-        }
-        @keyframes fadeInOut {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-        .gift-box {
-            cursor: pointer;
-            width: 100px;
-            height: 100px;
-            background: url('giftbox.png') no-repeat center center / contain;
-            margin: 20px auto;
-        }
-        .slide-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease-in, transform 1s ease-in;
-        }
-        .slide-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heyy Devuu</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('background.jpg'); /* Initial background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: lightpink;
+      font-family: Arial, sans-serif; /* Simple and readable font */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+      text-align: center;
+      transition: background-image 1s ease-in-out; /* Smooth background transition */
+    }
+
+    .screen {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .screen.active {
+      display: block;
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+    }
+
+    .love {
+      font-size: 8rem; /* Bigger love emoji */
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .love:hover {
+      transform: scale(1.2);
+    }
+
+    .long-text {
+      font-size: 1.5rem;
+      padding: 20px;
+      max-width: 90%;
+      margin: 0 auto;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+      border-radius: 10px;
+    }
+
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .image-container img {
+      width: 80%;
+      max-width: 300px;
+      border-radius: 10px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .image-container img.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
-    <h1 class="glow" id="text1">heyy devuu</h1>
-    <h1 class="glow hidden" id="text2">enik ninodi oru krym parayan ind</h1>
-    
-    <div class="gift-box" onclick="showMessage()"></div>
-    <h2 id="message" class="hidden">Happy Anniversary Muthee 💖</h2>
-    
-    <script>
-        function showText(id, delay, nextId) {
+  <div class="screen active" id="screen1">
+    <h1>heyy devuu</h1>
+  </div>
+
+  <div class="screen" id="screen2">
+    <h1>enik ninodi oru krym parayan ind</h1>
+  </div>
+
+  <div class="screen" id="screen3">
+    <h1>ethh thodd potati</h1>
+    <div class="love" onclick="showMessage()">❤️</div>
+  </div>
+
+  <div class="screen" id="screen4">
+    <h1>hapyy aniverssary muthee</h1>
+  </div>
+
+  <div class="screen" id="screen5">
+    <div class="long-text">
+      <p>This is a long text message for you. You mean the world to me, and I’m so grateful for everything you do. Let’s make this day special and cherish every moment together. I love you so much!</p>
+    </div>
+  </div>
+
+  <div class="screen" id="screen6">
+    <div class="image-container">
+      <img src="image1.jpg" alt="Image 1">
+      <img src="image2.jpg" alt="Image 2">
+      <img src="image3.jpg" alt="Image 3">
+    </div>
+  </div>
+
+  <div class="screen" id="screen7">
+    <h1>By ur love</h1>
+  </div>
+
+  <script>
+    let currentScreen = 1;
+    const totalScreens = 7;
+    let isPaused = false; // To track if the transition is paused
+    let timeoutId; // To store the timeout ID
+
+    function showMessage() {
+      document.getElementById('screen3').classList.remove('active');
+      document.getElementById('screen4').classList.add('active');
+      currentScreen = 4;
+
+      // Change the background to bg2.jpg
+      document.body.style.backgroundImage = "url('bg2.jpg')";
+
+      // Set a longer duration for the "hapyy aniverssary muthee" screen
+      clearTimeout(timeoutId); // Clear any existing timeout
+      timeoutId = setTimeout(nextScreen, 10000); // 10 seconds
+    }
+
+    function nextScreen() {
+      if (currentScreen < totalScreens && !isPaused) {
+        document.getElementById(`screen${currentScreen}`).classList.remove('active');
+        currentScreen++;
+        document.getElementById(`screen${currentScreen}`).classList.add('active');
+
+        if (currentScreen === 6) {
+          const images = document.querySelectorAll('.image-container img');
+          images.forEach((img, index) => {
             setTimeout(() => {
-                document.getElementById(id).classList.remove('hidden');
-                document.getElementById(id).classList.add('fade-in-out');
-                setTimeout(() => {
-                    document.getElementById(id).classList.add('hidden');
-                    if (nextId) document.getElementById(nextId).classList.remove('hidden');
-                }, 2000);
-            }, delay);
+              img.classList.add('active');
+            }, index * 500);
+          });
         }
-        
-        function showMessage() {
-            document.getElementById('message').classList.remove('hidden');
-        }
-        
-        window.onload = function() {
-            showText('text1', 1000, 'text2');
-            showText('text2', 4000, null);
-        };
-    </script>
-    
-    <a href="images.html" style="color: lightpink; display: block; margin-top: 20px;">View Images</a>
+
+        // Set timeout for the next screen
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(nextScreen, 3000); // Default 3 seconds
+      }
+    }
+
+    // Pause on press and hold
+    document.addEventListener('mousedown', () => {
+      isPaused = true;
+      clearTimeout(timeoutId); // Pause the transition
+    });
+
+    document.addEventListener('mouseup', () => {
+      isPaused = false;
+      nextScreen(); // Resume the transition
+    });
+
+    // For touch devices
+    document.addEventListener('touchstart', () => {
+      isPaused = true;
+      clearTimeout(timeoutId); // Pause the transition
+    });
+
+    document.addEventListener('touchend', () => {
+      isPaused = false;
+      nextScreen(); // Resume the transition
+    });
+
+    // Automatically start the transitions
+    nextScreen();
+  </script>
 </body>
 </html>
