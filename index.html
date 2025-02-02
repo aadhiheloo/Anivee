@@ -13,7 +13,7 @@
       background-position: center;
       background-repeat: no-repeat;
       color: black; /* Text color changed to black */
-      font-family: Arial, sans-serif; /* Simple and readable font */
+      font-family: Georgia, serif; /* Changed to serif font */
       display: flex;
       justify-content: center;
       align-items: center;
@@ -38,6 +38,20 @@
       font-size: 3rem;
       margin: 0;
       text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* White shadow for better readability */
+    }
+
+    /* Glow effect for screens starting from screen 10 */
+    .screen.glow-effect h1 {
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff69b4;
+      }
+      100% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff69b4, 0 0 30px #ff69b4, 0 0 40px #ff69b4, 0 0 50px #ff69b4;
+      }
     }
 
     .long-text {
@@ -110,21 +124,21 @@
     <h1>enu nmll 2year ayy ourmichhhitt</h1>
   </div>
 
-  <div class="screen" id="screen10">
-    <h1>hapyy aniverssary muthee </h1>
+  <div class="screen glow-effect" id="screen10">
+    <h1>hapyy aniverssary muthee</h1>
   </div>
 
-  <div class="screen" id="screen11">
-    <h1>hapyy aniverssary muthee </h1>
+  <div class="screen glow-effect" id="screen11">
+    <h1>hapyy aniverssary muthee</h1>
   </div>
 
-  <div class="screen" id="screen12">
+  <div class="screen glow-effect" id="screen12">
     <div class="long-text">
       <p>This is a long text message for you. You mean the world to me, and I’m so grateful for everything you do. Let’s make this day special and cherish every moment together. I love you so much!</p>
     </div>
   </div>
 
-  <div class="screen" id="screen13">
+  <div class="screen glow-effect" id="screen13">
     <div class="image-container">
       <img src="image1.jpg" alt="Image 1" onclick="expandImage(this)">
       <img src="image2.jpg" alt="Image 2" onclick="expandImage(this)">
@@ -132,11 +146,11 @@
     </div>
   </div>
 
-  <div class="screen" id="screen14">
+  <div class="screen glow-effect" id="screen14">
     <h1>i love youhh soo muchh mutheeee</h1>
   </div>
   
-  <div class="screen" id="screen15">
+  <div class="screen glow-effect" id="screen15">
     <h1>By ur love mmwahhhh</h1>
   </div>
 
@@ -151,6 +165,11 @@
         document.getElementById(`screen${currentScreen}`).classList.remove('active');
         currentScreen++;
         document.getElementById(`screen${currentScreen}`).classList.add('active');
+
+        // Change background to bg2.jpg starting from screen 10
+        if (currentScreen >= 10) {
+          document.body.style.backgroundImage = "url('bg2.jpg')";
+        }
 
         if (currentScreen === 12) {
           // Initialize image cards
