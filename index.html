@@ -8,11 +8,11 @@
     body {
       margin: 0;
       padding: 0;
-      background-image: url('background.jpeg'); /* Initial background image */
+      background-image: url('background.jpg'); /* Initial background image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      color: black;
+      color: black; /* Text color changed to black */
       font-family: Arial, sans-serif; /* Simple and readable font */
       display: flex;
       justify-content: center;
@@ -37,7 +37,7 @@
     h1 {
       font-size: 3rem;
       margin: 0;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add shadow for better readability */
+      text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* White shadow for better readability */
     }
 
     .love {
@@ -55,35 +55,37 @@
       padding: 20px;
       max-width: 90%;
       margin: 0 auto;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better readability */
+      background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background for better readability */
       border-radius: 10px;
     }
 
     .image-container {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 20px;
+      padding: 20px;
     }
 
     .image-container img {
-      width: 80%;
-      max-width: 300px;
+      width: 100px; /* Initial card size */
+      height: 100px;
       border-radius: 10px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 1s ease, transform 1s ease;
+      cursor: pointer;
+      transition: all 0.5s ease;
+      object-fit: cover;
     }
 
-    .image-container img.active {
-      opacity: 1;
-      transform: translateY(0);
+    .image-container img.expanded {
+      width: 80%; /* Expanded size */
+      height: auto;
+      max-width: 300px;
     }
   </style>
 </head>
 <body>
   <div class="screen active" id="screen1">
-    <h1>heyy devuu</h1>
+    <h1>hey devuu</h1> <!-- Changed to "hey devuu" -->
   </div>
 
   <div class="screen" id="screen2">
@@ -107,9 +109,9 @@
 
   <div class="screen" id="screen6">
     <div class="image-container">
-      <img src="image1.jpg" alt="Image 1">
-      <img src="image2.jpg" alt="Image 2">
-      <img src="image3.jpg" alt="Image 3">
+      <img src="image1.jpg" alt="Image 1" onclick="expandImage(this)">
+      <img src="image2.jpg" alt="Image 2" onclick="expandImage(this)">
+      <img src="image3.jpg" alt="Image 3" onclick="expandImage(this)">
     </div>
   </div>
 
@@ -131,9 +133,9 @@
       // Change the background to bg2.jpg
       document.body.style.backgroundImage = "url('bg2.jpg')";
 
-      // Set a longer duration for the "hapyy aniverssary muthee" screen
-      clearTimeout(timeoutId); // Clear any existing timeout
-      timeoutId = setTimeout(nextScreen, 10000); // 10 seconds
+      // Move to the next screen immediately
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(nextScreen, 3000); // Default 3 seconds
     }
 
     function nextScreen() {
@@ -143,18 +145,25 @@
         document.getElementById(`screen${currentScreen}`).classList.add('active');
 
         if (currentScreen === 6) {
+          // Initialize image cards
           const images = document.querySelectorAll('.image-container img');
-          images.forEach((img, index) => {
-            setTimeout(() => {
-              img.classList.add('active');
-            }, index * 500);
+          images.forEach(img => {
+            img.classList.remove('expanded');
           });
         }
-
-        // Set timeout for the next screen
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(nextScreen, 3000); // Default 3 seconds
       }
+    }
+
+    // Expand image when clicked
+    function expandImage(img) {
+      const images = document.querySelectorAll('.image-container img');
+      images.forEach(image => {
+        if (image === img) {
+          image.classList.toggle('expanded');
+        } else {
+          image.classList.remove('expanded');
+        }
+      });
     }
 
     // Pause on press and hold
