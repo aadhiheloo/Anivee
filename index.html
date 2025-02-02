@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-image: url('background.jpeg'); /* Initial background image */
+      background-image: url('background.jpg'); /* Initial background image */
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
@@ -38,16 +38,6 @@
       font-size: 3rem;
       margin: 0;
       text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5); /* White shadow for better readability */
-    }
-
-    .love {
-      font-size: 8rem; /* Bigger love emoji */
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-
-    .love:hover {
-      transform: scale(1.2);
     }
 
     .long-text {
@@ -85,7 +75,7 @@
 </head>
 <body>
   <div class="screen active" id="screen1">
-    <h1>hey devuu</h1> <!-- Changed to "hey devuu" -->
+    <h1>hey devuu</h1>
   </div>
 
   <div class="screen" id="screen2">
@@ -93,21 +83,44 @@
   </div>
 
   <div class="screen" id="screen3">
-    <h1>ethh thodd potati</h1>
-    <div class="love" onclick="showMessage()">❤️</div>
+    <h1>ndala sugale</h1>
   </div>
 
   <div class="screen" id="screen4">
-    <h1>hapyy aniverssary muthee</h1>
+    <h1>nda enu nalaa bangi indelo kanan</h1>
   </div>
 
   <div class="screen" id="screen5">
+    <h1>enu kulichond areku</h1>
+  </div>
+
+  <div class="screen" id="screen6">
+    <h1>enatha spcl nna ariyu</h1>
+  </div>
+
+  <div class="screen" id="screen7">
+    <h1>yesssss enu monday aneee</h1>
+  </div>
+
+  <div class="screen" id="screen8">
+    <h1>hehe ala</h1>
+  </div>
+
+  <div class="screen" id="screen9">
+    <h1>enu nmll 2year ayy ourmichhhitt</h1>
+  </div>
+
+  <div class="screen" id="screen10">
+    <h1>hapyy aniverssary muthee</h1>
+  </div>
+
+  <div class="screen" id="screen11">
     <div class="long-text">
       <p>This is a long text message for you. You mean the world to me, and I’m so grateful for everything you do. Let’s make this day special and cherish every moment together. I love you so much!</p>
     </div>
   </div>
 
-  <div class="screen" id="screen6">
+  <div class="screen" id="screen12">
     <div class="image-container">
       <img src="image1.jpg" alt="Image 1" onclick="expandImage(this)">
       <img src="image2.jpg" alt="Image 2" onclick="expandImage(this)">
@@ -115,28 +128,15 @@
     </div>
   </div>
 
-  <div class="screen" id="screen7">
+  <div class="screen" id="screen13">
     <h1>By ur love</h1>
   </div>
 
   <script>
     let currentScreen = 1;
-    const totalScreens = 7;
+    const totalScreens = 13;
     let isPaused = false; // To track if the transition is paused
     let timeoutId; // To store the timeout ID
-
-    function showMessage() {
-      document.getElementById('screen3').classList.remove('active');
-      document.getElementById('screen4').classList.add('active');
-      currentScreen = 4;
-
-      // Change the background to bg2.jpg
-      document.body.style.backgroundImage = "url('bg2.jpg')";
-
-      // Move to the next screen immediately
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(nextScreen, 3000); // Default 3 seconds
-    }
 
     function nextScreen() {
       if (currentScreen < totalScreens && !isPaused) {
@@ -144,7 +144,7 @@
         currentScreen++;
         document.getElementById(`screen${currentScreen}`).classList.add('active');
 
-        if (currentScreen === 6) {
+        if (currentScreen === 12) {
           // Initialize image cards
           const images = document.querySelectorAll('.image-container img');
           images.forEach(img => {
