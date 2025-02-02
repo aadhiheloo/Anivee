@@ -80,6 +80,13 @@
       cursor: pointer;
       transition: all 0.5s ease;
       object-fit: cover;
+      opacity: 0; /* Initially hidden */
+      transform: translateY(20px); /* Slight upward shift */
+    }
+
+    .image-container img.active {
+      opacity: 1; /* Make visible */
+      transform: translateY(0); /* Reset position */
     }
 
     .image-container img.expanded {
@@ -175,11 +182,13 @@
           document.body.style.backgroundImage = "url('bg2.jpg')";
         }
 
-        if (currentScreen === 12) {
-          // Initialize image cards
+        // Show images one by one in screen 13
+        if (currentScreen === 13) {
           const images = document.querySelectorAll('.image-container img');
-          images.forEach(img => {
-            img.classList.remove('expanded');
+          images.forEach((img, index) => {
+            setTimeout(() => {
+              img.classList.add('active');
+            }, index * 500); // Delay each image by 500ms
           });
         }
       }
